@@ -2,15 +2,31 @@
 
 var express = require('express'),
 		config = require('configure'),
-		app = express();
+		twilio = require('twilio');
 
-app.get('/unlock', function(req,res) {
-	var sms = req.query;
-	console.log(sms.Body);
-	console.log(sms.From);
+var validate = require('./helpers/validate'),
+		buzzer = require('./helpers/buzzer');
+
+var app = express();
+
+
+app.get('/unlock', function(req, res){
+
+	if (validate.isValid(req.query.From, req.query.Body)) {
+		console.log("Message received from: " + req.query.From + " || " + req.query.Body);
+	} else {
+		console.log("Invalid request");
+	}
+
+	res.end();
+
 });
 
-var port = Number(config.port);
-app.listen(port, function(){
-	console.log('The sh-1033 unlock server is now running on port '+port+'...');
+app.get('*', function(req,res){
+	console.log("Invalid request received");
+	res.status(404).end();
 });
+
+app.listen(Number(config.port), function(){
+	console.log('The ' + config.serverName + ' unlock server is now running on port ' + Number(config.port) + '...');
+}); 

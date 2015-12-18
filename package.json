@@ -11,7 +11,10 @@
   "dependencies": {
     "configure": "0.0.1",
     "express": "^4.13.3",
+    "moment": "^2.10.6",
     "pi-gpio": "0.0.8",
-    "twilio": "^2.8.0"
+    "timezonedb-node": "^1.0.5",
+    "twilio": "^2.8.0",
+    "underscore": "^1.8.3"
   }
 }
