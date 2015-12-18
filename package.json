@@ -9,6 +9,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.13.3"
+    "configure": "0.0.1",
+    "express": "^4.13.3",
+    "pi-gpio": "0.0.8",
+    "twilio": "^2.8.0"
   }
 }
