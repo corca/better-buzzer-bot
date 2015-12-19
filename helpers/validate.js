@@ -4,18 +4,6 @@ var config = require('configure'),
 		moment = require('moment'),
 		timezone = require('timezonedb-node')(config.timezonedb.key);
 
-function getCurrentTime() {
-	timezone.getTimeZoneData({
-		zone: config.timezonedb.timezone
-	}, function(err,data){
-		if (!err) {
-			return data.timestamp;
-		} else {
-			console.error(err);
-		}
-	});
-}
-
 var validate = function (smsPhone, smsMessage) {
 
 	var valid = false;
@@ -45,7 +33,9 @@ var validate = function (smsPhone, smsMessage) {
 
 	if (config.passwords[passwordUsed].partyWindow) {
 		var partyWindow = config.passwords[passwordUsed].partyWindow;
-		
+		var partyStart = moment(partyWindow.start).startOf('day').unix();
+		var partyEnd = moment(partyWindow.end).endOf('day').unix();
+		console.log("Is " + "{{current time}}" + " between " + partyStart + " and " + partyEnd);
 	}
 
 
